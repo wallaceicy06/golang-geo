@@ -3,10 +3,11 @@ package geo
 import (
 	_ "database/sql"
 	"fmt"
-	"github.com/erikstmartin/go-testdb"
 	"os"
 	"strconv"
 	"testing"
+
+	"github.com/erikstmartin/go-testdb"
 )
 
 // TODO This paticular test is just one big integration for using the entire library.
@@ -24,7 +25,7 @@ func TestPointsWithinRadiusIntegration(t *testing.T) {
 	s, sqlErr := HandleWithSQL()
 
 	if sqlErr != nil {
-		t.Error("ERROR: %s", sqlErr)
+		t.Errorf("ERROR: %s", sqlErr)
 	}
 
 	// SFO
