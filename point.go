@@ -84,7 +84,7 @@ func (p *Point) GreatCircleDistance(p2 *Point) float64 {
 	return EARTH_RADIUS * c
 }
 
-// BearingTo: Calculates the initial bearing (sometimes referred to as forward azimuth)
+// BearingTo: Calculates the initial bearing in degrees (sometimes referred to as forward azimuth)
 // Original Implementation from: http://www.movable-type.co.uk/scripts/latlong.html
 func (p *Point) BearingTo(p2 *Point) float64 {
 
@@ -97,7 +97,10 @@ func (p *Point) BearingTo(p2 *Point) float64 {
 	x := math.Cos(lat1)*math.Sin(lat2) -
 		math.Sin(lat1)*math.Cos(lat2)*math.Cos(dLon)
 	brng := math.Atan2(y, x) * 180.0 / math.Pi
-
+	// Account for math.Atan2 returning negative values.
+	if brng < 0 {
+		brng = 360 + brng
+	}
 	return brng
 }
 
